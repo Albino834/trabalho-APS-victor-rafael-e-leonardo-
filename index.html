@@ -1,213 +1,54 @@
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Protótipo do processo de adoção por patrocinador do Refúgio Arcano."
-    />
-    <title>Refúgio Arcano · Adoção</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="shell header-inner">
-        <a class="brand" href="#" aria-label="Refúgio Arcano">
-          <span class="brand-mark">✦</span>
-          <span
-            ><small>Sistema de gestão</small
-            ><strong>Refúgio Arcano</strong></span
-          >
-        </a>
-        <div class="role-switch" aria-label="Área do sistema">
-          <button class="role-button active" id="sponsorRoleBtn">
-            Patrocinador
-          </button>
-          <button class="role-button" id="guardianRoleBtn">Guardião</button>
-        </div>
-      </div>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refúgio de Criaturas Mágicas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Refúgio de Criaturas Mágicas</h1>
+        <p>Sistema de adoção por patrocinador</p>
     </header>
 
-    <main class="shell">
-      <section class="hero">
-        <div>
-          <p class="eyebrow" id="areaLabel">Área do patrocinador</p>
-          <h1 id="pageTitle">Processar uma adoção.</h1>
-          <p id="pageSubtitle">
-            Solicite o vínculo com uma criatura e acompanhe o processo até a
-            decisão do guardião.
-          </p>
-        </div>
-        <div class="profile">
-          <span class="avatar" id="profileAvatar">EM</span
-          ><span id="profileName">Elara Moon</span>
-        </div>
-      </section>
+    <main>
+        <h2>Solicitar Adoção</h2>
 
-      <nav
-        class="tabs sponsor-tabs"
-        id="sponsorTabs"
-        aria-label="Navegação do patrocinador"
-      >
-        <button class="tab active" data-screen="requestScreen">
-          Solicitar adoção
-        </button>
-        <button class="tab" data-screen="trackingScreen">
-          Minha solicitação
-        </button>
-      </nav>
-      <nav
-        class="tabs guardian-tabs hidden"
-        id="guardianTabs"
-        aria-label="Navegação do guardião"
-      >
-        <button class="tab active" data-screen="guardianQueueScreen">
-          Solicitações pendentes <span class="count" id="pendingCount">0</span>
-        </button>
-        <button class="tab" data-screen="guardianHistoryScreen">
-          Histórico
-        </button>
-      </nav>
+        <label>Nome do patrocinador:</label>
+        <input type="text" id="patrocinador" placeholder="Digite seu nome">
 
-      <section class="screen active" id="requestScreen">
-        <div class="two-columns">
-          <article class="card">
-            <div class="card-head">
-              <div>
-                <p class="kicker">TelaSolicitacaoAdocao</p>
-                <h2>Nova solicitação</h2>
-              </div>
-              <span class="step-number">01</span>
-            </div>
-            <form class="form" id="adoptionForm">
-              <div class="field">
-                <label for="sponsor">Nome do patrocinador</label
-                ><input
-                  id="sponsor"
-                  type="text"
-                  value="Elara Moon"
-                  placeholder="Digite seu nome"
-                  required
-                />
-                <p class="hint">
-                  O sistema usará seu cadastro para verificar pendências.
-                </p>
-              </div>
-              <div class="field">
-                <label for="creature">Criatura desejada</label
-                ><select id="creature"></select>
-              </div>
-              <div class="creature-summary" id="creatureSummary"></div>
-              <button class="button primary" type="submit">
-                Enviar solicitação <span>→</span>
-              </button>
-            </form>
-          </article>
+        <label>Escolha uma criatura:</label>
+        <select id="criatura">
+            <option value="">Selecione uma criatura</option>
+            <option value="disponivel">Dragão Azul</option>
+            <option value="disponivel">Fênix Dourada</option>
+            <option value="indisponivel">Grifo Sombrio</option>
+        </select>
 
-          <article class="card explanation-card">
-            <div class="card-head">
-              <div>
-                <p class="kicker">Como funciona</p>
-                <h2>Três participantes</h2>
-              </div>
-            </div>
-            <div class="actor-list">
-              <div class="actor">
-                <span class="actor-icon sponsor-icon">P</span>
-                <div>
-                  <strong>Patrocinador</strong>
-                  <p>Indica a criatura e acompanha o resultado.</p>
-                </div>
-              </div>
-              <div class="actor">
-                <span class="actor-icon system-icon">S</span>
-                <div>
-                  <strong>Sistema</strong>
-                  <p>
-                    Verifica disponibilidade, pendências e registra a adoção.
-                  </p>
-                </div>
-              </div>
-              <div class="actor">
-                <span class="actor-icon guardian-icon">G</span>
-                <div>
-                  <strong>Guardião</strong>
-                  <p>Analisa a solicitação e autoriza ou recusa.</p>
-                </div>
-              </div>
-            </div>
-            <div class="rule-note">
-              <strong>Regra do processo</strong>
-              <p>
-                A adoção só se torna <em>Ativa</em> quando a criatura está
-                disponível, o patrocinador não possui pendências e o guardião
-                autoriza.
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
+        <label class="check">
+            <input type="checkbox" id="pendencia">
+            Possuo pendências no refúgio
+        </label>
 
-      <section class="screen" id="trackingScreen">
-        <div class="section-heading">
-          <div>
-            <p class="kicker">TelaResultadoAdocao</p>
-            <h2>Acompanhe sua solicitação</h2>
-            <p>O sistema mantém o histórico de cada decisão.</p>
-          </div>
-          <button class="button quiet" id="newRequestBtn">
-            Nova solicitação
-          </button>
-        </div>
-        <div id="trackingContent"></div>
-      </section>
+        <label>Decisão do guardião:</label>
+        <select id="guardiao">
+            <option value="">Aguardando decisão</option>
+            <option value="sim">Autorizar adoção</option>
+            <option value="nao">Recusar adoção</option>
+        </select>
 
-      <section class="screen" id="guardianQueueScreen">
-        <div class="section-heading">
-          <div>
-            <p class="kicker">Área do guardião</p>
-            <h2>Solicitações para análise</h2>
-            <p>Revise as verificações do sistema antes de tomar uma decisão.</p>
-          </div>
-          <span class="date-label">Dados do protótipo</span>
-        </div>
-        <div class="guardian-layout">
-          <div class="card request-list" id="requestList"></div>
-          <div class="card detail-panel" id="guardianDetail"></div>
-        </div>
-      </section>
+        <button onclick="processarAdocao()">Solicitar Adoção</button>
 
-      <section class="screen" id="guardianHistoryScreen">
-        <div class="section-heading">
-          <div>
-            <p class="kicker">Histórico de adoções</p>
-            <h2>Decisões registradas</h2>
-            <p>
-              Adoções ativas e recusadas permanecem no histórico do sistema.
-            </p>
-          </div>
-        </div>
-        <div class="card history-card" id="historyContent"></div>
-      </section>
-
-      <section class="activity-flow">
-        <div>
-          <p class="kicker">Caso de uso em foco</p>
-          <h2>Processar uma adoção por patrocinador</h2>
-        </div>
-        <div class="flow-line">
-          <span><b>01</b> Solicitação</span><i>→</i
-          ><span><b>02</b> Verificações do sistema</span><i>→</i
-          ><span><b>03</b> Análise do guardião</span><i>→</i
-          ><span><b>04</b> Resultado e relatório</span>
-        </div>
-      </section>
-      <p class="footnote">
-        Projeto acadêmico · Análise de Projeto de Sistemas · 2º Informática
-      </p>
+        <div id="resultado"></div>
     </main>
-    <div class="toast" id="toast" role="status"></div>
+
+    <footer>
+        <p>Projeto de APS - 2º Informática</p>
+    </footer>
+
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
